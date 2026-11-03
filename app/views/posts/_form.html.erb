@@ -1,0 +1,43 @@
+<%= form_with model: @post do |f| %>
+
+  <% if @post.errors.any? %>
+    <div class="alert">
+      <% @post.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+
+    <%= f.label :title %>
+
+    <%= f.text_field :title,
+                     placeholder: "Enter post title",
+                     maxlength: 100 %>
+
+  </div>
+
+  <div class="form-group">
+
+    <%= f.label :body %>
+
+    <%= f.text_area :body,
+                    placeholder: "Write something...",
+                    rows: 10,
+                    maxlength: 2000,
+                    data: {
+                      controller: "character-counter",
+                      action: "input->character-counter#update"
+                    } %>
+
+    <div class="counter">
+      Characters:
+      <span data-character-counter-target="count">0</span>/2000
+    </div>
+
+  </div>
+
+  <%= f.submit class: "btn" %>
+
+<% end %>

@@ -1,0 +1,37 @@
+<div class="page-header">
+  <div>
+    <h1>Latest Posts</h1>
+    <p>Discover interesting articles from our community.</p>
+  </div>
+
+  <% if user_signed_in? %>
+    <%= link_to "Create Post", new_post_path, class: "btn" %>
+  <% end %>
+</div>
+
+<%= form_with url: posts_path,
+              method: :get,
+              data: { turbo_frame: "posts_list" },
+              class: "search-form" do |f| %>
+
+  <%= f.text_field :query,
+                   value: params[:query],
+                   placeholder: "Search posts..." %>
+
+  <%= f.submit "Search", class: "btn" %>
+
+<% end %>
+
+<%= turbo_frame_tag "posts_list" do %>
+
+  <div class="posts-grid" id="posts">
+
+  <%= render @posts %>
+
+  <% if @posts.empty? %>
+    <p>No posts found.</p>
+  <% end %>
+
+</div>
+
+<% end %>

@@ -1,0 +1,30 @@
+<%= turbo_frame_tag dom_id(post) do %>
+
+  <article class="post-card">
+
+    <h2>
+      <%= link_to post.title, post_path(post) %>
+    </h2>
+
+    <p><%= truncate(post.body, length: 150) %></p>
+
+    <div class="post-meta">
+      By <%= post.user.email %>
+    </div>
+
+    <% if policy(post).update? %>
+      <div class="post-actions">
+
+        <%= link_to "Edit", edit_post_path(post) %>
+
+        <%= button_to "Delete",
+                      post_path(post),
+                      method: :delete,
+                      data: { turbo_confirm: "Delete this post?" } %>
+
+      </div>
+    <% end %>
+
+  </article>
+
+<% end %>

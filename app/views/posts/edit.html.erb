@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id(@post) do %>
+
+  <h2>Edit Post</h2>
+
+  <%= render "form" %>
+
+  <%= link_to "Cancel", post_path(@post) %>
+
+<% end %>

@@ -1,0 +1,20 @@
+<%= turbo_frame_tag dom_id(@post) do %>
+
+  <h1><%= @post.title %></h1>
+
+  <div class="post-meta">
+    By <%= @post.user.email %>
+  </div>
+
+  <div class="post-body">
+    <%= simple_format(@post.body) %>
+  </div>
+
+  <% if policy(@post).update? %>
+    <%= link_to "Edit",
+                edit_post_path(@post) %>
+  <% end %>
+
+  <%= link_to "Back", posts_path %>
+
+<% end %>
